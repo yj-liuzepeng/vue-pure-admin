@@ -35,7 +35,7 @@ const {
       ref="formRef"
       :inline="true"
       :model="form"
-      class="search-form bg-bg_color w-[99/100] pl-8 pt-[12px]"
+      class="search-form bg-bg_color w-[99/100] pl-8 pt-[12px] overflow-auto"
     >
       <el-form-item label="菜单名称：" prop="title">
         <el-input
@@ -61,7 +61,7 @@ const {
     </el-form>
 
     <PureTableBar
-      title="菜单管理（初版，持续完善中）"
+      title="菜单管理（仅演示，操作后不生效）"
       :columns="columns"
       :isExpandAll="false"
       :tableRef="tableRef?.getTableRef()"

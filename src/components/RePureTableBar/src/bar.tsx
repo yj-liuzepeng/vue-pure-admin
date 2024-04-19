@@ -1,5 +1,15 @@
+import Sortable from "sortablejs";
+import { transformI18n } from "@/plugins/i18n";
 import { useEpThemeStoreHook } from "@/store/modules/epTheme";
-import { defineComponent, ref, computed, type PropType, nextTick } from "vue";
+import {
+  type PropType,
+  ref,
+  unref,
+  computed,
+  nextTick,
+  defineComponent,
+  getCurrentInstance
+} from "vue";
 import {
   delay,
   cloneDeep,
@@ -8,7 +18,6 @@ import {
   getKeyList
 } from "@pureadmin/utils";
 
-import Sortable from "sortablejs";
 import DragIcon from "./svg/drag.svg?component";
 import ExpandIcon from "./svg/expand.svg?component";
 import RefreshIcon from "./svg/refresh.svg?component";
@@ -33,6 +42,10 @@ const props = {
   isExpandAll: {
     type: Boolean,
     default: true
+  },
+  tableKey: {
+    type: [String, Number] as PropType<string | number>,
+    default: "0"
   }
 };
 
@@ -45,6 +58,7 @@ export default defineComponent({
     const loading = ref(false);
     const checkAll = ref(true);
     const isIndeterminate = ref(false);
+    const instance = getCurrentInstance()!;
     const isExpandAll = ref(props.isExpandAll);
     const filterColumns = cloneDeep(props?.columns).filter(column =>
       isBoolean(column?.hide)
@@ -118,6 +132,7 @@ export default defineComponent({
     }
 
     function handleCheckedColumnsChange(value: string[]) {
+      checkedColumns.value = value;
       const checkedCount = value.length;
       checkAll.value = checkedCount === checkColumnList.length;
       isIndeterminate.value =
@@ -125,7 +140,9 @@ export default defineComponent({
     }
 
     function handleCheckColumnListChange(val: boolean, label: string) {
-      dynamicColumns.value.filter(item => item.label === label)[0].hide = !val;
+      dynamicColumns.value.filter(
+        item => transformI18n(item.label) === transformI18n(label)
+      )[0].hide = !val;
     }
 
     async function onReset() {
@@ -166,9 +183,9 @@ export default defineComponent({
     const rowDrop = (event: { preventDefault: () => void }) => {
       event.preventDefault();
       nextTick(() => {
-        const wrapper: HTMLElement = document.querySelector(
-          ".el-checkbox-group>div"
-        );
+        const wrapper: HTMLElement = (
+          instance?.proxy?.$refs[`GroupRef${unref(props.tableKey)}`] as any
+        ).$el.firstElementChild;
         Sortable.create(wrapper, {
           animation: 300,
           handle: ".drag-btn",
@@ -198,7 +215,9 @@ export default defineComponent({
     };
 
     const isFixedColumn = (label: string) => {
-      return dynamicColumns.value.filter(item => item.label === label)[0].fixed
+      return dynamicColumns.value.filter(
+        item => transformI18n(item.label) === transformI18n(label)
+      )[0].fixed
         ? true
         : false;
     };
@@ -293,7 +312,8 @@ export default defineComponent({
                 <div class="pt-[6px] pl-[11px]">
                   <el-scrollbar max-height="36vh">
                     <el-checkbox-group
-                      v-model={checkedColumns.value}
+                      ref={`GroupRef${unref(props.tableKey)}`}
+                      modelValue={checkedColumns.value}
                       onChange={value => handleCheckedColumnsChange(value)}
                     >
                       <el-space
@@ -301,7 +321,7 @@ export default defineComponent({
                         alignment="flex-start"
                         size={0}
                       >
-                        {checkColumnList.map(item => {
+                        {checkColumnList.map((item, index) => {
                           return (
                             <div class="flex items-center">
                               <DragIcon
@@ -316,17 +336,18 @@ export default defineComponent({
                                 }) => rowDrop(event)}
                               />
                               <el-checkbox
-                                key={item}
+                                key={index}
+                                label={item}
                                 value={item}
                                 onChange={value =>
                                   handleCheckColumnListChange(value, item)
                                 }
                               >
                                 <span
-                                  title={item}
+                                  title={transformI18n(item)}
                                   class="inline-block w-[120px] truncate hover:text-text_color_primary"
                                 >
-                                  {item}
+                                  {transformI18n(item)}
                                 </span>
                               </el-checkbox>
                             </div>

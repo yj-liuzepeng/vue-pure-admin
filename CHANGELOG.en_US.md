@@ -1,8 +1,107 @@
+# 5.4.0 (2024-04-18)
+
+### 🎫 Feat
+
+- Add global disabled attribute `disabled` to `ReSegmented` component
+- Added mind map examples
+- Functional pop-up box `ReDialog` adds `Popconfirm` bubble confirmation box
+- `pure-table` adds `headerSlot` custom header slot usage example
+- The route adds a configurable `fixedTag` attribute, which determines whether the current menu name is fixedly displayed on the tab and cannot be closed.
+- Added account setting function page and compatible with mobile terminals
+- Upgrade `eslint9` and related compatibility processing
+- Added global configuration `MaxTagsLevel` property to set the maximum number of open tabs
+- Full coverage of the internationalization of the core code of the framework (only the internationalization of the business code needs to be processed)
+
+### 🐞 Bug fixes
+
+- Fixed the issue where columns cannot be dragged normally when there are multiple `RePureTableBar` components on a page
+- Fixed the problem of icon display style after the third-level menu is folded to the left
+- Fixed the issue where the font color does not take effect after refreshing the account settings page
+- Fixed the issue where the `refreshToken` parameter is empty when calling the refresh `token` interface
+
+### 🍏 Perf
+
+- Optimize login interface
+- Optimize the logic of obtaining the top menu
+- Optimize request whitelist logic and be compatible with more scenarios
+- Simplified export and import usage in `store` files
+- Removed unnecessary `cloc` tool dependency package, which uses the `GPL` open source license and is controversial
+- Optimize the types of `post` and `get` utility functions in `src/utils/http` files
+
+# 5.3.0 (2024-03-28)
+
+### ✔️ refactor
+
+- Reconstruct internationalized file naming conventions and demo pages with code location hints
+
+### 🎫 Feat
+
+- Add `MQTT` example
+- Added `docx` and `excel` file preview examples
+- The `ReSegmented` segmented controller has a new `size` attribute, which can set three sizes
+- The `RePureTableBar` component and `pure-admin-table` support international switching of table headers
+
+# 5.2.0 (2024-03-22)
+
+### ✔️ refactor
+
+- Place the full screen button at the top to make it visible and easy to operate
+
+### 🎫 Feat
+
+- Added `v-ripple` command (water ripple effect)
+- Add global `Stretch` configuration to the content area to customize compact pages and easily find the required information
+- Added roaming guidance based on `ElTour`
+- Improve role management-menu permission function, novel interactive experience
+- Add system monitoring-online users
+- Add system monitoring-login log
+- Add system monitoring-operation log
+- Add system monitoring-system log
+- Add more more convenient `pure-admin-table` editable table examples (overall editing, single row editing, cell editing)
+- The `ReSegmented` component has a new `block` attribute to make it fit the width of the parent element
+- Add [vue-flow](https://vueflow.dev/) flow chart example
+- Add virtual table example
+- Added Gantt chart example
+- Add graphic verification code example
+- Add form examples, which can be generated through `JSON` format configuration (basic form, pop-up form, drawer form, step-by-step form, search form)
+- Add a folding and expanding menu function on the middle right side of the left menu
+
+### 🐞 Bug fixes
+
+- Fixed the scroll bar issue when clicking on the registration page under `windwos`
+- Fixed the problem of scroll bars appearing in the content area when switching pages under `windows`
+- Fixed the problem of status style disappearing in `pure-table` with status table under dark overall style
+- Fixed the problem of turning on the gray mode and dark overall style in the project configuration and refreshing the overall style of the page.
+
+### 🍏 Perf
+
+- All pages of system management and system monitoring are compatible with mobile terminals
+
+# 5.1.0 (2024-03-02)
+
+### ✔️ refactor
+
+- Reconstruct the tab page `UI` to make it more convenient to click the close button
+
+### 🎫 Feat
+
+- Added multi-select card example
+- The menu supports all browser behaviors of right-clicking on the `a` tag (opening links in new tabs, new windows, dragging and dropping to open in new tabs, etc.)
+- Added search history and collection functions to menu search
+
+### 🐞 Bug fixes
+
+- Fixed the problem of scroll bars appearing on the login page under `windows` system
+
+### 🍏 Perf
+
+- Standardize the naming rules when registering local icons to better match the icon selector
+
 # 5.0.0 (2024-02-26)
 
 Totally `ESM` version
 
-### ✔️refactor
+### ✔️ refactor
 
 - Upgrade `vite` to `v5` version, specify `node` version `>18.18.0`, `pnpm` version `>=8.6.10`
 - Use [vite-plugin-fake-server](https://www.npmjs.com/package/vite-plugin-fake-server) to replace [vite-plugin-mock](https://www.npmjs.com/package/vite-plugin-mock), use [@faker-js/faker](https://www.npmjs.com/package/@faker-js/faker) to replace [mockjs](https://www.npmjs.com/package/mockjs)
@@ -18,7 +117,7 @@ Totally `ESM` version
 - Cleaner and neater pop-up panel on the right side of project configuration
 - Restructure the About page to make it more compact and key information more prominent
 
-### 🎫Feat
+### 🎫 Feat
 
 - Add system management-menu management
 - Improve system management-user management
@@ -59,7 +158,7 @@ Totally `ESM` version
 - Fixed the problem that the right-click tab page panel cannot be closed when clicking on the `iframe` page and the right-click tab page panel is blocked when on the `iframe` page
 - Fixed the problem of missing parameters when clicking on breadcrumbs to jump to the page in routing `query` and `params` modes
 
-### 🍏Perf
+### 🍏 Perf
 
 - Optimize theme color
 - Tabs can be slid left or right according to the sliding force

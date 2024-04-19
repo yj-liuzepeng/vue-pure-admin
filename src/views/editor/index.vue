@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { Base, Multi, PicUpload } from "./components";
+import { EditorBase, EditorMulti, EditorUpload } from "./components";
 
 defineOptions({
   name: "Editor"
@@ -24,16 +24,23 @@ const activeNames = ref("1");
           </el-link>
         </span>
       </div>
+      <el-link
+        class="mt-2"
+        href="https://github.com/pure-admin/vue-pure-admin/blob/main/src/views/editor"
+        target="_blank"
+      >
+        代码位置 src/views/editor
+      </el-link>
     </template>
     <el-collapse v-model="activeNames" accordion>
       <el-collapse-item title="基础用法" name="1">
-        <Base v-if="activeNames === '1'" />
+        <EditorBase v-if="activeNames === '1'" />
       </el-collapse-item>
       <el-collapse-item title="多个富文本" name="2">
-        <Multi v-if="activeNames === '2'" />
+        <EditorMulti v-if="activeNames === '2'" />
       </el-collapse-item>
       <el-collapse-item title="自定义图片上传" name="3">
-        <PicUpload v-if="activeNames === '3'" />
+        <EditorUpload v-if="activeNames === '3'" />
       </el-collapse-item>
     </el-collapse>
   </el-card>

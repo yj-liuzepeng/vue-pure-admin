@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 // https://plus-pro-components.com/components/check-card-group.html
-import { PlusCheckCardGroup } from "plus-pro-components";
 import "plus-pro-components/es/components/check-card-group/style/css";
+import { PlusCheckCardGroup } from "plus-pro-components";
 
 defineOptions({
   name: "CheckCard"
@@ -52,7 +52,7 @@ watch(size, val =>
           >
             多选卡片组
           </el-link>
-          <el-radio-group v-model="size" size="small">
+          <el-radio-group v-model="size">
             <el-radio value="large">大尺寸</el-radio>
             <el-radio value="default">默认尺寸</el-radio>
             <el-radio value="small">小尺寸</el-radio>
@@ -60,6 +60,13 @@ watch(size, val =>
           </el-radio-group>
         </el-space>
       </div>
+      <el-link
+        class="mt-2"
+        href="https://github.com/pure-admin/vue-pure-admin/blob/main/src/views/components/check-card.vue"
+        target="_blank"
+      >
+        代码位置 src/views/components/check-card.vue
+      </el-link>
     </template>
 
     <p class="mb-2 mt-4">单选</p>
